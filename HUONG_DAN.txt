@@ -1,0 +1,20 @@
+SPENDMATE AI - CHẠY TRÊN ANDROID STUDIO
+
+1) Mở thư mục SpendMate_AI bằng Android Studio (File > Open). Dùng bản Koala (2024.1) trở lên,
+   JDK 17 (bản kèm Android Studio là đủ). Đợi Gradle sync lần đầu (cần Internet).
+   Nếu Android Studio hỏi tạo/cập nhật Gradle wrapper thì chọn đồng ý.
+2) Đăng nhập demo:  demo@smartspend.vn  /  password123  (hoặc bấm đăng nhập Google, hoặc đăng ký mới).
+3) Dữ liệu là database GIẢ trong bộ nhớ (tự tạo theo ngày hôm nay, tắt app là mất những gì bạn thêm).
+   Sau này thay bằng Room: giữ nguyên interface trong data/local/dao, đổi InMemoryDatabase.repository.
+
+CHATBOT AI (tùy chọn; không chạy backend thì chatbot tự dùng chế độ cơ bản)
+a) Vào thư mục spendmate_backend:  pip install -r requirements.txt
+b) Lấy key tại aistudio.google.com rồi đặt biến môi trường (chỉ đặt ở máy chạy backend):
+   Windows:  set GEMINI_API_KEY=key_cua_ban   &   set APP_TOKEN=doi-chuoi-nay
+   Mac/Linux: export GEMINI_API_KEY=... APP_TOKEN=...
+c) uvicorn main:app --host 0.0.0.0 --port 8000
+d) Trong app/src/main/java/com/example/smartspend/ui/ai/SpendMateAi.kt, object SpendMateConfig:
+   APP_TOKEN phải trùng với APP_TOKEN ở backend.
+   Emulator giữ BASE_URL = http://10.0.2.2:8000 ; máy thật đổi sang http://IP-LAN-máy-tính:8000.
+Ví dụ hỏi thử: "tháng này tôi chi bao nhiêu", "ăn uống còn bao nhiêu ngân sách",
+"hôm qua ăn tối 120k", "tôi nên cắt giảm khoản nào", "xóa giao dịch grab hôm qua".
